@@ -13,6 +13,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 //
 import { Router } from '@angular/router';
 
+//
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -20,6 +23,10 @@ import { Router } from '@angular/router';
 })
 
 export class LoginFormComponent {
+  //
+  public showSpinner = false;
+
+  //
   @Input() userDetails = { Username: '', Password: '' };
 
   //
@@ -36,6 +43,7 @@ export class LoginFormComponent {
 
   //
   loginUser(): void {
+    this.showSpinner = true;
     //
     this.fetchApiData.userLogin(this.userDetails).subscribe((response) => {
       //
@@ -50,10 +58,12 @@ export class LoginFormComponent {
         duration: 2000
       });
       this.router.navigate(['movies']);
+      this.showSpinner = false;
     }, (response) => {
       this.snackBar.open('Login successful', 'OK', {
         duration: 2000
       });
+      this.showSpinner = false;
     });
   }
 

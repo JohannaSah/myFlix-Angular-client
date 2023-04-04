@@ -1,10 +1,4 @@
-<div class="title-wrapper">
-    <h1
-        class="title"
-    > 
-        myFlix 
-    </h1>
-</div>
+<app-navbar />
 
 <div class="movie-grid">
     <mat-card 
@@ -23,26 +17,51 @@
       <mat-card-actions>
         <button 
             mat-button 
-            color="primary"
+            color="black"
+            (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
         >
             Genre
         </button>
         <button 
             mat-button 
-            color="primary"
+            color="black"
+            (click)="openDirectorDialog(
+                movie.Director.Name,
+                movie.Director.Bio,
+                movie.Director.YearOfBirth
+            )"
         >
             Director
         </button>
         <button    
             mat-button 
-            color="primary"
+            color="black"
+            (click)="openSynopsisDialog(movie.imageUrl, movie.Title, movie.Description)"
         >
             Synopsis
         </button>
-        <mat-icon>
-            favorite_border
-        </mat-icon>
+        <button
+            mat-button
+            class="mat-icon-button"
+            *ngIf="!isFavorite(movie._id)"
+            (click)="addToFavorites(movie._id)"
+            color="black"
+        >
+            <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button
+            mat-button
+            class="mat-icon-button"
+            *ngIf="isFavorite(movie._id)"
+            (click)="removeFromFavorites(movie._id)"
+            color="warn"
+        >
+            <mat-icon>favorite</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <app-footer />
+  
   
