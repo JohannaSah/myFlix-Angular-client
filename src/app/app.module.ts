@@ -40,6 +40,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
+//
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,4 +75,5 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
