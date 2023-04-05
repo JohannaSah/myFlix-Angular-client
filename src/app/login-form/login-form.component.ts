@@ -43,26 +43,24 @@ export class LoginFormComponent {
 
   //
   loginUser(): void {
+    //
     this.showSpinner = true;
     //
     this.fetchApiData.userLogin(this.userDetails).subscribe((response) => {
       //
-      console.log(response);
-      //
-      localStorage.setItem('user', response.user.Username);
-      localStorage.setItem('token', response.token);
-      //
-      this.dialogRef.close();
-      //
-      this.snackBar.open('Login successful', 'OK', {
-        duration: 2000
-      });
-      this.router.navigate(['movies']);
-    }, (response) => {
-      this.snackBar.open('Login successful', 'OK', {
-        duration: 2000
-      });
-      this.showSpinner = false;
+        localStorage.setItem('user', response.user.Username);
+        localStorage.setItem('token', response.token);
+        //
+        this.dialogRef.close();
+        //
+        this.snackBar.open('Login successful', 'OK', { duration: 2000 });
+        //
+        this.router.navigate(['movies']);
+    }, (error) => {
+        //
+        this.showSpinner = false;
+        //
+        this.snackBar.open('Login unsuccessful', 'OK', { duration: 2000 });
     });
   }
 

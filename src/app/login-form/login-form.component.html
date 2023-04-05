@@ -39,5 +39,10 @@
             Login
         </button>
     </mat-card-actions>
-    <mat-progress-spinner *ngIf="showSpinner" color="primary"></mat-progress-spinner>
+    <mat-progress-spinner 
+        *ngIf="showSpinner" 
+        mode="indeterminate"
+        class="spinner"
+        diameter="250"
+    ></mat-progress-spinner>
 </mat-card>

@@ -98,15 +98,15 @@ export class FetchApiDataService {
 
   // Making the api call for the get favourite movies for a user endpoint
   public getFavouriteMovies(username: string): Observable<any> {
-  const token = localStorage.getItem('token');
-  return this.http.get(apiUrl + `users/${username}/movies`, {headers: new HttpHeaders(
-    {
-      Authorization: 'Bearer ' + token,
-    })})
-    .pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + `users/${username}/movies`, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })})
+      .pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Making the api call for adding a movie to favorite movies

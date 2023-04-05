@@ -30,7 +30,7 @@ export class MovieCardComponent {
   //
   ngOnInit(): void {
     this.getMovies();
-    this.getFavorites();
+    this.getFavoriteMovies();
   }
 
   //
@@ -43,7 +43,7 @@ export class MovieCardComponent {
   }
 
   //
-  getFavorites(): void {
+  getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
       return this.favorites;
