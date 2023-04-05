@@ -59,4 +59,10 @@
             Sign up
         </button>
     </mat-card-actions>
+    <mat-progress-spinner 
+        *ngIf="showSpinner" 
+        mode="indeterminate"
+        class="spinner"
+        diameter="300"
+    ></mat-progress-spinner>
 </mat-card>
