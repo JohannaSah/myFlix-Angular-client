@@ -2,6 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+// Import necessary components
+import { SearchBarComponent } from '../search-bar/search-bar.component';
+
 // Component decorator
 @Component({
   selector: 'app-navbar',

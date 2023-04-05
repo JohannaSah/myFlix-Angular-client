@@ -19,6 +19,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
 import { FooterComponent } from './footer/footer.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 // imports for angular material
 import { MatInputModule } from '@angular/material/input';
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     NavbarComponent,
     FavoriteMoviesComponent,
-    FooterComponent
+    FooterComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
