@@ -1,24 +1,26 @@
+// Importing required modules and services
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { formatDate } from '@angular/common';
 
+
+// Component decorator
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
 })
 
-//
+// Exporting class for user profile component
 export class UserProfileComponent implements OnInit {
 
-  //
+  // Initializing variables
   user: any = {};
   initialInput: any = {};
   favorites: any = [];
 
-  //
+  // Initializing inputs with default values
   @Input() updatedUser = {
     Username: '',
     Password: '',
@@ -26,13 +28,14 @@ export class UserProfileComponent implements OnInit {
     Birthday: '',
   };
 
-  //
+  // Constructor with dependency injection
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
 
+  // Lifecycle hook that is called after data-bound properties are initialized
   ngOnInit(): void {
     this.getUserInfo();
   }

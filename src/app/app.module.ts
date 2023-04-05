@@ -1,9 +1,13 @@
+// Importing required modules and services
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule, Routes } from '@angular/router';
 
+// Importing required components
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { MovieCardComponent } from './movie-card/movie-card.component';
@@ -14,10 +18,7 @@ import { SynopsisComponent } from './synopsis/synopsis.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FavoriteMoviesComponent } from './favorite-movies/favorite-movies.component';
-
-import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { FooterComponent } from './footer/footer.component';
 
 // imports for angular material
 import { MatInputModule } from '@angular/material/input';
@@ -29,10 +30,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FooterComponent } from './footer/footer.component';
 
-
-//
+// Defining the routes
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
@@ -40,7 +39,8 @@ const appRoutes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
-//
+
+// Defining the module
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,4 +76,5 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 
+// Exporting the module
 export class AppModule { }
