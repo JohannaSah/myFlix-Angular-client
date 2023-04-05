@@ -26,7 +26,7 @@ export class UserProfileComponent implements OnInit {
     Birthday: '',
   };
 
-    //
+  //
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,

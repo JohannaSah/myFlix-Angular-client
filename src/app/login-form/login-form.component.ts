@@ -58,7 +58,6 @@ export class LoginFormComponent {
         duration: 2000
       });
       this.router.navigate(['movies']);
-      this.showSpinner = false;
     }, (response) => {
       this.snackBar.open('Login successful', 'OK', {
         duration: 2000
