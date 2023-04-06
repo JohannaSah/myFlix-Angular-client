@@ -30,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 // Defining the routes
 const appRoutes: Routes = [
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     NavbarComponent,
     FavoriteMoviesComponent,
-    FooterComponent
+    FooterComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,

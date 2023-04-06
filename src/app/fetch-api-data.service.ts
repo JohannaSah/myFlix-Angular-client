@@ -57,6 +57,19 @@ export class FetchApiDataService {
       );
   }
 
+  // Making the api call for the get one movie by title endpoint
+  public getOneMovie(Title: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + `movies/${Title}`, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + token,
+    })})
+    .pipe(
+      map(this.extractResponseData),
+      catchError(this.handleError)
+    );
+  }
+
   // Making the api call for the get director endpoint
   public getDirector(directorName: string): Observable<any> {
     const token = localStorage.getItem('token');
