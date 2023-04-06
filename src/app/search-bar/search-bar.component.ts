@@ -38,7 +38,7 @@ export class SearchBarComponent implements OnInit {
       });
 
       // Call your fetchApiService method here passing the `movies` array
-      this.fetchApiDataService.getOneMovie();
+      this.fetchApiDataService.getOneMovie(this.searchQuery);
     });
   }
 }

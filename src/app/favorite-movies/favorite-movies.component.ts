@@ -49,15 +49,16 @@ export class FavoriteMoviesComponent {
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       console.log(resp);
-      this.favorites = resp.FavoriteMovies;
-      console.log(resp.FavoriteMovies);
+      this.favorites = this.movies.filter(movie => resp.FavoriteMovies.includes(movie._id));
+      console.log(resp.FavoriteMovies, 'favorites');
       return this.favorites;
     });
   }
 
   // Method to check if a movie is in the user's favorites list
   isFavorite(_id: string): boolean {
-    return this.favorites.includes(_id);
+    let isFavorite = this.favorites.some(movie => movie._id == _id)
+    return isFavorite;
   }
 
   // Method to add a movie to the user's favorites list
