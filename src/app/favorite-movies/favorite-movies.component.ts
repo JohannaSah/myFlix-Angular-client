@@ -79,9 +79,9 @@ export class FavoriteMoviesComponent {
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       console.log(resp);
-      this.favorites = resp.FavoriteMovies;
-      console.log(resp.FavoriteMovies);
-      return this.favorites;
+      this.favorites = this.movies.filter(movie => resp.FavoriteMovies.includes(movie._id));
+      console.log(this.favorites, 'favourites');
+      return this.favorites; 
     });
   }
 
@@ -92,7 +92,8 @@ export class FavoriteMoviesComponent {
    * @returns {boolean} - True if the movie is in the user's favorites list, false otherwise.
    */
   isFavorite(_id: string): boolean {
-    return this.favorites.includes(_id);
+    let isFavorite = this.favorites.some(movie => movie._id == _id)
+    return isFavorite;
   }
 
   /**
