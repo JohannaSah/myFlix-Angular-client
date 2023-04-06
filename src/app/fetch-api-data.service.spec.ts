@@ -1,3 +1,7 @@
+/**
+ * Unit test for the FetchApiDataService.
+ */
+
 import { TestBed } from '@angular/core/testing';
 
 import { FetchApiDataService } from './fetch-api-data.service';
