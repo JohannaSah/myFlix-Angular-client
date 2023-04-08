@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreComponent } from '../genre-component/genre-component.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
+// Import other necessary components
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 
 // Declare the component and its metadata
 @Component({
