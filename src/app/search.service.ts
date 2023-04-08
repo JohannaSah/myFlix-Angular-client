@@ -31,7 +31,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   search(query: string, searchBy: string): Observable<Movie[]> {
-    const url = `${this.apiUrl}/movies?${searchBy}=${query}`;
+    const url = `${this.apiUrl}movies?${searchBy}=${query}`;
     return this.http.get(url).pipe(
       map((response: any) => {
         if (response && response.data) {
