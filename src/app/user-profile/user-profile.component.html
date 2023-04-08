@@ -26,7 +26,7 @@
                         <input
                             matInput
                             [(ngModel)]="updatedUser.Password"
-                            value="{{ updatedUser.Username }}"
+                            value=""
                             placeholder="Your new Password"
                             type="password"
                             name="Password"
@@ -55,11 +55,12 @@
                             matInput
                             [(ngModel)]="updatedUser.Birthday"
                             type="date"
-                            value="{{ updatedUser.Birthday | date:'yyyy-MM-dd':'UTC+0' }}"
+                            value="{{ updatedUser.Birthday }}"
                             name="Birthday"
                         />
                     </mat-form-field>
                 </div>
+                <div> <p> Please fill all fields to update </p></div>
             </form>
         </mat-card-content>
         <mat-card-actions class="user-profile-actions">
