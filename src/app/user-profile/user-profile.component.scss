@@ -13,8 +13,32 @@
     justify-content: center;
 }
 
-.profile-card {
+.profile-info-card {
     width: 75%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px;
+}
+
+.userInfo {
+    margin-bottom: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+td {
+    padding: 10px;
+}
+
+.profile-edit-card {
+    width: 75%;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;

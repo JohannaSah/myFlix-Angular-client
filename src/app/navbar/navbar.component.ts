@@ -7,6 +7,7 @@
 // Import necessary modules from Angular
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 // Component decorator
 @Component({
@@ -19,19 +20,22 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
   
   /**
-   * Injects the Router service.
+   * Injects the Router and Location service.
    * @param router - The router service.
+   * @param location - the location service
    */
-  constructor(public router: Router) {}
+  constructor(private router: Router, private location: Location) {}
   
   // OnInit lifecycle hook
   ngOnInit(): void {}
 
   /**
-   * Navigates to the movies page when the Movies button is clicked.
+   * Navigates to the movies page and refreshes the movies page when the Movies button is clicked.
    */
   toMovies(): void {
     this.router.navigate(['movies']);
+    this.location.replaceState('/movies');
+    window.location.reload();
   }
 
   /**

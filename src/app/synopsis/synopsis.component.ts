@@ -8,7 +8,6 @@
 // Import necessary dependencies
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 
 // Define the component
 @Component({
@@ -31,8 +30,7 @@ export class SynopsisComponent {
       imageUrl: string,
       Title: string;
       Description: string;
-    },
-    public router: Router
+    }
   ) {}
 
   // OnInit lifecycle hook

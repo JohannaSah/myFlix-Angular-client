@@ -2,7 +2,7 @@
  * The WelcomePageComponent displays a welcome page with buttons to open dialogs for user registration and login.
 */
 
-// Importing required modules and services
+// Importing required modules, components and services
 import { Component, OnInit } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';

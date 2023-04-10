@@ -8,8 +8,6 @@
 // Importing necessary components from Angular
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-
 /**
  * Component decorator with selector, template and styles
  */
@@ -35,8 +33,6 @@ export class GenreComponent implements OnInit {
       Name: string;
       Description: string;
     },
-    // Injecting Router to navigate to different routes
-    public router: Router
   ) {}
 
   // Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive

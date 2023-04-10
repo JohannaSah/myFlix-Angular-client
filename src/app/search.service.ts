@@ -64,10 +64,12 @@ export class SearchService {
     const url = `${this.apiUrl}movies?${searchBy}=${query}`;
     return this.http.get(url).pipe(
       map((response: any) => {
-        if (response && response.data) {
-          return response.data as Movie[];
+        if (response && response) {
+          const movies = response as Movie[];
+          console.log('response as movie[]', movies);
+          console.log('searchresult',movies);
+          return movies;
         }
-        console.log(response.data as Movie[]);
         return [];
       })
     );

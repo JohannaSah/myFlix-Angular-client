@@ -31,11 +31,20 @@ export class MovieCardComponent {
   /**
    * The list of all movies.
    * @property {any[]} movies
-   * * The list of user's favorite movies.
+   *
+   *  The list of user's favorite movies.
    * @property {any[]} favorites
+   * 
+   *  The searchQuery string
+   * @property {''} searchQueryEvent
+   * 
+   * The searchResults list
+   * @property {any[]} searchResults
    */
   movies: any[] = [];
   favorites: any[] = [];
+  searchQuery: string = '';
+  searchResults: any[] = [];
 
   /**
    * Constructor function that sets up the component with necessary dependencies
@@ -58,6 +67,17 @@ export class MovieCardComponent {
   ngOnInit(): void {
     this.getMovies();
     this.getFavoriteMovies();
+  }
+
+  /**
+   * Updates the list of movies with the filtered movies and logs the filtered movies to the console.
+   * @param filteredMovies An array of movie objects that match the search query and search criteria.
+   * @returns void
+   */
+  receiveFilteredMovies(filteredMovies: any[]): void {
+    this.movies = filteredMovies;
+    console.log('filteredMovies', filteredMovies);
+    this.searchResults = filteredMovies;
   }
 
   /**
