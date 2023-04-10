@@ -8,8 +8,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreComponent } from '../genre-component/genre-component.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-// Import other necessary components
+
+// Import other necessary components and services
 import { SearchBarComponent } from '../search-bar/search-bar.component';
+import { SearchService } from '../search.service';
 
 // Declare the component and its metadata
 @Component({
@@ -21,6 +23,9 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 // Declare the component class
 export class MovieCardComponent {
 
+  searchQuery: string = '';
+  searchResults: any[] = [];
+
   // Thesse arrays will hold all of the movies and the favorite movies
   movies: any[] = [];
   favorites: any[] = [];
@@ -29,7 +34,8 @@ export class MovieCardComponent {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private searchService: SearchService
   ) {}
 
   // The ngOnInit function is called when the component is first initialized
@@ -38,13 +44,26 @@ export class MovieCardComponent {
     this.getMovies();
     // Call the getFavoriteMovies function when the component is first initialized
     this.getFavoriteMovies();
+    //
+    this.searchService.getSearchQuery().subscribe((query: string) => {
+      this.searchQuery = query;
+      this.getMovies();
+    });
   }
 
   // Function to get all the movies from the database and store them in the movies array
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log(this.movies);
+      console.log('this.movies from getMovies():',this.movies);
+      if (this.searchQuery) {
+        // Filter movies by search query
+        this.searchResults = this.movies.filter((movie) => {
+          return movie.Title.toLowerCase().includes(this.searchQuery.toLowerCase());
+        });
+      } else {
+        this.searchResults = this.movies;
+      }
       return this.movies;
     })
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Movie {
   _id: string;
@@ -27,21 +28,28 @@ export interface Movie {
 
 export class SearchService {
   private apiUrl = 'https://movieapi-dcj2.onrender.com/';
+  private searchQuery = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) { }
 
-  search(query: string, searchBy: string): Observable<Movie[]> { 
+  setSearchQuery(query: string): void {
+    this.searchQuery.next(query);
+  }
+
+  getSearchQuery(): BehaviorSubject<string> {
+    return this.searchQuery;
+  }
+
+  search(query: string, searchBy: string): Observable<Movie[]> {
     const url = `${this.apiUrl}movies?${searchBy}=${query}`;
-    console.log(url);
+    console.log('api url:', url);
     return this.http.get(url).pipe(
       map((response: any) => {
-        console.log(response);
-        if (response && response.data) {
-          const movies = response.data as Movie[];
-          return movies.filter(movie => movie.Title.toLowerCase().includes(query.toLowerCase()));
+        console.log('reponse:', response);
+        if (response && response) {
+          return response as Movie[];
         }
-        console.log(response.data as Movie[]);
-        console.log('no movie found');
+        console.log('response as movie[]', response as Movie[]);
         return [];
       })
     );
