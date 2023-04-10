@@ -28,22 +28,9 @@ export interface Movie {
 
 export class SearchService {
   private apiUrl = 'https://movieapi-dcj2.onrender.com/';
-  public searchQuery = new BehaviorSubject<string>('');
-  public searchResults = new EventEmitter<any[]>();
 
   constructor(private http: HttpClient) { }
 
-  setSearchQuery(query: string): void {
-    this.searchQuery.next(query);
-  }
-
-  getSearchQuery(): BehaviorSubject<string> {
-    return this.searchQuery;
-  }
-
-  getSearchResults(): EventEmitter<Movie[]> {
-    return this.searchResults;
-  }
 
   search(query: string, searchBy: string): Observable<Movie[]> {
     const url = `${this.apiUrl}movies?${searchBy}=${query}`;
@@ -54,7 +41,6 @@ export class SearchService {
         if (response && response) {
           const movies = response as Movie[];
           console.log('response as movie[]', movies);
-          this.searchResults.emit(movies); 
           console.log('searchresult',movies);
           return movies;
         }
