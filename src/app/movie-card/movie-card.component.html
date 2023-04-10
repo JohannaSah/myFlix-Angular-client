@@ -1,0 +1,136 @@
+<app-navbar />
+
+<div class="search-bar">
+    <app-search-bar 
+        (searchQueryEvent)="receiveFilteredMovies($event)" 
+    />
+</div>
+<div class="movie-grid">
+    <ng-container *ngIf="searchResults.length > 0; else allMovies">
+        <mat-card 
+            *ngFor="let movie of searchResults;"
+            class="movie-card"
+        >
+            <img 
+                src="{{movie.imageUrl}}" 
+                alt="{{movie.Title}}" 
+            />
+            <mat-card-header>
+                <mat-card-title>
+                    {{movie.Title}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-actions>
+                <button 
+                    mat-button 
+                    color="black"
+                    (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
+                >
+                    Genre
+                </button>
+                <button 
+                    mat-button 
+                    color="black"
+                    (click)="openDirectorDialog(
+                        movie.Director.Name,
+                        movie.Director.Bio,
+                        movie.Director.YearOfBirth
+                    )"
+                >
+                    Director
+                </button>
+                <button    
+                    mat-button 
+                    color="black"
+                    (click)="openSynopsisDialog(movie.imageUrl, movie.Title, movie.Description)"
+                >
+                    Synopsis
+                </button>
+                <button
+                    mat-button
+                    class="mat-icon-button"
+                    *ngIf="!isFavorite(movie._id)"
+                    (click)="addToFavorites(movie._id)"
+                    color="black"
+                >
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button
+                    mat-button
+                    class="mat-icon-button"
+                    *ngIf="isFavorite(movie._id)"
+                    (click)="removeFromFavorites(movie._id)"
+                    color="warn"
+                >
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+
+    <ng-template #allMovies>
+        <mat-card 
+            *ngFor="let movie of movies;"
+            class="movie-card"
+        >
+            <img 
+                src="{{movie.imageUrl}}" 
+                alt="{{movie.Title}}" 
+            />
+            <mat-card-header>
+                <mat-card-title>
+                    {{movie.Title}}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-actions>
+                <button 
+                    mat-button 
+                    color="black"
+                    (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
+                >
+                    Genre
+                </button>
+                <button 
+                    mat-button 
+                    color="black"
+                    (click)="openDirectorDialog(
+                        movie.Director.Name,
+                        movie.Director.Bio,
+                        movie.Director.YearOfBirth
+                    )"
+                >
+                    Director
+                </button>
+                <button    
+                    mat-button 
+                    color="black"
+                    (click)="openSynopsisDialog(movie.imageUrl, movie.Title, movie.Description)"
+                >
+                    Synopsis
+                </button>
+                <button
+                    mat-button
+                    class="mat-icon-button"
+                    *ngIf="!isFavorite(movie._id)"
+                    (click)="addToFavorites(movie._id)"
+                    color="black"
+                >
+                    <mat-icon>favorite_border</mat-icon>
+                </button>
+                <button
+                    mat-button
+                    class="mat-icon-button"
+                    *ngIf="isFavorite(movie._id)"
+                    (click)="removeFromFavorites(movie._id)"
+                    color="warn"
+                >
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-template>
+  </div>
+
+  <app-footer />
+  
+  

@@ -1,0 +1,121 @@
+<app-navbar />
+
+<h1 class="user-title">Hello {{ updatedUser.Username }} !</h1>
+<div class="profile-page">
+    <mat-card class="profile-info-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h2> User Information </h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="userInfo">
+            <table>
+                <tr>
+                  <td>Username:</td>
+                  <td>{{ updatedUser.Username }}</td>
+                </tr>
+                
+                <tr>
+                  <td>Email:</td>
+                  <td>{{ updatedUser.Email }}</td>
+                </tr>
+                
+                <tr>
+                  <td>Birthday:</td>
+                  <td>{{ updatedUser.Birthday | date:'yyyy-MM-dd':'UTC+0' }}</td>
+                </tr>
+              </table>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="profile-edit-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h2> Edit User Information </h2>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="user-profile-edit-card-content">
+            <form class="user-info">
+                <div class="name-and-password">
+                    <mat-form-field>
+                        <mat-label>
+                            Username
+                        </mat-label>
+                        <input
+                            matInput
+                            [(ngModel)]="updatedUser.Username"
+                            value="{{ updatedUser.Username }}"
+                            type="text"
+                            name="Username"
+                            required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            Update Password
+                        </mat-label>
+                        <input
+                            matInput
+                            [(ngModel)]="updatedUser.Password"
+                            value=""
+                            placeholder="Your new Password"
+                            type="password"
+                            name="Password"
+                        />
+                    </mat-form-field>
+                </div>
+                <div class="email-and-bday">
+                    <mat-form-field>
+                        <mat-label>
+                            Email
+                        </mat-label>
+                        <input
+                            matInput
+                            [(ngModel)]="updatedUser.Email"
+                            type="email"
+                            value="{{ updatedUser.Email }}"
+                            name="Email"
+                            required
+                        />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>
+                            Birthday
+                        </mat-label>
+                        <input
+                            matInput
+                            [(ngModel)]="updatedUser.Birthday"
+                            type="date"
+                            value="{{ updatedUser.Birthday | date:'yyyy-MM-dd':'UTC+0' }}"
+                            name="Birthday"
+                        />
+                    </mat-form-field>
+                </div>
+            </form>
+        </mat-card-content>
+        <mat-card-actions class="user-profile-actions">
+        <button 
+            mat-raised-button 
+            (click)="updateUserInfo()" 
+            color="primary"
+        >
+            <mat-icon>
+                edit
+            </mat-icon>
+            Update profile
+        </button>
+        <button 
+            mat-raised-button 
+            (click)="deleteAccount()" 
+            color="warn"
+        >
+            <mat-icon>
+                delete_forever
+            </mat-icon>
+            Delete account
+        </button>
+        </mat-card-actions>
+  </mat-card>
+  <app-favorite-movies />
+</div>
+
+<app-footer />
