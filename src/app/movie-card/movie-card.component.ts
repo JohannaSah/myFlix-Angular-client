@@ -1,3 +1,10 @@
+/**
+ * This component displays a list of movie cards, each of which contains information about a specific movie.
+ * Users can add or remove movies from their list of favorite movies by clicking on the corresponding buttons.
+ * Users can also click on buttons to view additional information about the movie, such as its genre, director, and synopsis.
+ * The component gets data from an API service and displays it using Angular Material components.
+*/
+
 // Importing necessary components and services
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
@@ -9,7 +16,9 @@ import { GenreComponent } from '../genre-component/genre-component.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
 
-// Declare the component and its metadata
+/**
+ * Movie card component that displays all the movies
+ */
 @Component({
   selector: 'app-movie-card',
   templateUrl: './movie-card.component.html',
@@ -19,35 +28,62 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
 // Declare the component class
 export class MovieCardComponent {
 
+  /**
+   * The list of all movies.
+   * @property {any[]} movies
+   *
+   *  The list of user's favorite movies.
+   * @property {any[]} favorites
+   * 
+   *  The searchQuery string
+   * @property {''} searchQueryEvent
+   * 
+   * The searchResults list
+   * @property {any[]} searchResults
+   */
+  movies: any[] = [];
+  favorites: any[] = [];
   searchQuery: string = '';
   searchResults: any[] = [];
 
-  // Thesse arrays will hold all of the movies and the favorite movies
-  movies: any[] = [];
-  favorites: any[] = [];
-
-  // The constructor function sets up the component with necessary dependencies
+  /**
+   * Constructor function that sets up the component with necessary dependencies
+   * @param {FetchApiDataService} fetchApiData - Service that fetches data from the API
+   * @param {MatDialog} dialog - Service for displaying dialog components
+   * @param {MatSnackBar} snackBar - Service for displaying snack bar notifications
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
     public snackBar: MatSnackBar
   ) {}
 
-  // The ngOnInit function is called when the component is first initialized
+  /**
+   * Lifecycle hook that is called when the component is initialized.
+   * Calls getMovies() and getFavoriteMovies().
+   * @method ngOnInit
+   * @returns {void}
+  */
   ngOnInit(): void {
-    // Call the getMovies function when the component is first initialized
     this.getMovies();
-    // Call the getFavoriteMovies function when the component is first initialized
     this.getFavoriteMovies();
   }
 
+  /**
+   * Updates the list of movies with the filtered movies and logs the filtered movies to the console.
+   * @param filteredMovies An array of movie objects that match the search query and search criteria.
+   * @returns void
+   */
   receiveFilteredMovies(filteredMovies: any[]): void {
     this.movies = filteredMovies;
     console.log('filteredMovies', filteredMovies);
     this.searchResults = filteredMovies;
   }
 
-  // Function to get all the movies from the database and store them in the movies array
+  /**
+   * Function to get all the movies from the database and store them in the movies array
+   * @returns {any[]} - Array of all the movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -57,7 +93,10 @@ export class MovieCardComponent {
     })
   }
 
-  // Function to get the user's favorite movies from the database and store them in the favorites array
+  /**
+   * Function to get the user's favorite movies from the database and store them in the favorites array
+   * @returns {any[]} - Array of the user's favorite movies
+  */
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.favorites = resp.FavoriteMovies;
@@ -65,12 +104,19 @@ export class MovieCardComponent {
     });
   }
 
-  // Function to check if a movie is in the user's favorites
+  /**
+   * Function to check if a movie is in the user's favorites
+   * @param {_id} - The movie ID to check
+   * @returns {boolean} - Whether or not the movie is in the user's favorites
+  */
   isFavorite(_id: string): boolean {
     return this.favorites.includes(_id);
   }
 
-  // Function to add a movie to the user's favorites
+  /**
+   * Function to add a movie to the user's favorites
+   * @param {_id} - The movie ID to add to favorites
+   */
   addToFavorites(_id: string): void {
     console.log(_id);
     this.fetchApiData.addFavoriteMovie(_id).subscribe((result) => {
@@ -81,7 +127,10 @@ export class MovieCardComponent {
     });
   }
 
-  // Function to remove a movie from the user's favorites
+  /**
+   * Function to remove a movie from the user's favorites
+   * @param {_id} - The movie ID to remove from favorites
+   */
   removeFromFavorites(_id: string): void {
     console.log(_id);
     this.fetchApiData.removeFavoriteMovie(_id).subscribe((result) => {
@@ -92,7 +141,12 @@ export class MovieCardComponent {
     });
   }
 
-  // Function to open the genre dialog component when a genre button is clicked
+  /**
+   * Opens the genre dialog component when a genre button is clicked
+   * 
+   * @param name The name of the genre
+   * @param description The description of the genre
+  */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreComponent, {
       data: {
@@ -104,20 +158,32 @@ export class MovieCardComponent {
     });
   }
 
-  // Function to open the director dialog component when a director button is clicked
-  openDirectorDialog(name: string, bio: string, birthday: string): void {
+  /**
+   * Opens the director dialog component when a director button is clicked
+   * 
+   * @param name The name of the director
+   * @param bio The biography of the director
+   * @param birthyear The birth year of the director
+  */
+  openDirectorDialog(name: string, bio: string, birthyear: string): void {
     this.dialog.open(DirectorComponent, {
       data: {
         Name: name,
         Bio: bio,
-        Birth: birthday,
+        Birth: birthyear,
       },
       width: '50%',
       minWidth: '300px'
     });
   }
 
-  // Function to open the synopsis dialog component when a synopsis button is clicked
+  /**
+   * Opens the synopsis dialog component when a synopsis button is clicked
+   * 
+   * @param imageUrl The URL of the movie's image
+   * @param title The title of the movie
+   * @param description The description of the movie
+  */
   openSynopsisDialog(imageUrl: string, title: string, description: string): void {
     this.dialog.open(SynopsisComponent, {
       data: {

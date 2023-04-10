@@ -1,9 +1,14 @@
+/**
+ * This is the user profile component
+ * it displays the user's information and allows them to change it
+ * as well as to delete the profile.
+*/
+
 // Importing required modules and services
 import { Component, Input, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
 
 // Component decorator
 @Component({
@@ -15,12 +20,26 @@ import { Router } from '@angular/router';
 // Exporting class for user profile component
 export class UserProfileComponent implements OnInit {
 
-  // Initializing variables
+  /**
+   * User object containing user information.
+   * @property {any{}} user
+   * Object containing initial user input values.
+   * @property {any{}} initialInput
+   * The list of user's favorite movies.
+   * @property {any[]} favorites
+   */
   user: any = {};
   initialInput: any = {};
   favorites: any = [];
 
-  // Initializing inputs with default values
+  /**
+   * The updated user information, initialized with default values.
+   * @property {Object} updatedUser
+   * @property {string} updatedUser.Username - The updated user's username.
+   * @property {string} updatedUser.Password - The updated user's password.
+   * @property {string} updatedUser.Email - The updated user's email.
+   * @property {string} updatedUser.Birthday - The updated user's birthday.
+   */
   @Input() updatedUser = {
     Username: '',
     Password: '',
@@ -28,19 +47,34 @@ export class UserProfileComponent implements OnInit {
     Birthday: '',
   };
 
-  // Constructor with dependency injection
+  /**
+   * Creates an instance of UserProfileComponent
+   * @param fetchApiData - instance of FetchApiDataService
+   * @param snackBar - instance of MatSnackBar
+   * @param router - instance of Router
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public snackBar: MatSnackBar,
     private router: Router
   ) {}
 
-  // Lifecycle hook that is called after data-bound properties are initialized
+  /**
+   * Lifecycle hook that is called when the component is initialized.
+   * Calls getUserInfo()
+   * @method ngOnInit
+   * @returns {void}
+  */
   ngOnInit(): void {
     this.getUserInfo();
   }
 
-  // Fetch user data via API
+  /**
+   * Fetches the user's data via the API and sets it to the component's `user` property.
+   * Also sets the `updatedUser` input values to the corresponding user properties
+   * and sets the `favorites` property to the user's favorite movies.
+   * @returns The user's data.
+   */
   getUserInfo(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       this.user = resp;
@@ -52,7 +86,14 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // Update user data, such as username, password, email, or birthday
+  /**
+   * Update user information.
+   *
+   * Sends a request to the API to update the user's information based on the updatedUser object.
+   * If the username or password is updated, the user is logged out and redirected to the welcome page.
+   *
+   * @returns void
+   */
   updateUserInfo(): void {
     this.fetchApiData.editUser(this.updatedUser).subscribe((result) => {
       console.log(result);
@@ -79,7 +120,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // Delete user data for the user that is logged in
+  /**
+   * Deletes the user's account.
+   * Displays a confirmation dialog to warn the user of the consequences.
+   * If the user confirms, the account is deleted and the user is redirected to the welcome page.
+   * If the deletion is successful, the user's information is cleared from local storage.
+   * @returns void
+   */
   deleteAccount(): void {
     if (confirm('All your data will be lost - this cannnot be undone!')) {
       this.router.navigate(['welcome']).then(() => {

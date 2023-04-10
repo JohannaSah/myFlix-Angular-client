@@ -1,3 +1,9 @@
+/**
+ * This is a test suite for the AppComponent. It tests if the component is created, if the title property
+ * is set to the expected value, and if the title is rendered in the component's template.
+ * @testing-library/angular
+ */
+
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';

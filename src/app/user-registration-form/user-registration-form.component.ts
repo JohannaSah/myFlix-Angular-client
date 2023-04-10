@@ -1,3 +1,10 @@
+/**
+ * This is the user registration component
+ * This component handles user registration 
+ * by sending the form inputs to the backend and displaying success or error messages.
+ * it is displayed on the welcome page, when the register button is clicked
+*/
+
 // import necessary modules and services
 import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -14,11 +21,23 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Declare the component class
 export class UserRegistrationFormComponent {
-  // Declare variables
+  
+  /**
+   * Flag that determines whether or not to display the spinner.
+   */
   public showSpinner = false;
+
+  /**
+   * User data object that contains the input values from the registration form.
+   */
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
-  // Inject services into the component
+  /**
+   * Creates an instance of UserRegistrationFormComponent.
+   * @param fetchApiData - The API service responsible for handling HTTP requests.
+   * @param dialogRef - The reference to the dialog opened by the component.
+   * @param snackBar - The Angular Material component responsible for displaying snack bar messages.
+   */
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -29,7 +48,12 @@ export class UserRegistrationFormComponent {
   ngOnInit(): void {
   }
 
-  // This is the function responsible for sending the form inputs to the backend
+  /**
+   * registerUser()
+   * Sends the user registration form inputs to the backend for user registration.
+   * Displays a success message and closes the dialog if the registration is successful,
+   * otherwise displays an error message.
+   */
   registerUser(): void {
     // Show spinner
     this.showSpinner = true;

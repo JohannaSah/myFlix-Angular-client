@@ -1,3 +1,10 @@
+/**
+ * This is the main module for the myFlix Angular client application.
+ * It defines the root component of the application, as well as the routes and modules
+ * that the application will use. It also imports the necessary Angular Material modules
+ * for styling and provides the necessary services to the components.
+*/
+
 // Importing required modules and services
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -41,7 +48,12 @@ const appRoutes: Routes = [
 ];
 
 
-// Defining the module
+/**
+ * The main app module that defines the properties for the app.
+ * @export
+ * @class AppModule
+ * @implements {NgModule}
+ */
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,5 +90,9 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 
-// Exporting the module
+/**
+ * The AppModule class that exports the module.
+ * @export
+ * @class AppModule
+ */
 export class AppModule { }
