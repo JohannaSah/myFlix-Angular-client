@@ -34,8 +34,7 @@ export class MovieCardComponent {
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar,
-    private searchService: SearchService
+    public snackBar: MatSnackBar
   ) {}
 
   // The ngOnInit function is called when the component is first initialized
@@ -44,12 +43,6 @@ export class MovieCardComponent {
     this.getMovies();
     // Call the getFavoriteMovies function when the component is first initialized
     this.getFavoriteMovies();
-    //
-    this.searchService.getSearchQuery().subscribe((query: string) => {
-      console.log('searchservice listener', query);
-      this.searchQuery = query;
-      this.getMovies();
-    });
   }
 
   receiveFilteredMovies(filteredMovies: any[]): void {
