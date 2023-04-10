@@ -51,6 +51,8 @@ export class SearchBarComponent implements OnInit {
       console.log('Emitting search query event with query:', this.searchQuery);
   
       this.searchQueryEvent.emit(this.movies);
+
+      this.searchQuery = '';
     });
   }
 }

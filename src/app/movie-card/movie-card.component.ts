@@ -9,10 +9,6 @@ import { GenreComponent } from '../genre-component/genre-component.component';
 import { DirectorComponent } from '../director/director.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
 
-// Import other necessary components and services
-import { SearchBarComponent } from '../search-bar/search-bar.component';
-import { SearchService } from '../search.service';
-
 // Declare the component and its metadata
 @Component({
   selector: 'app-movie-card',

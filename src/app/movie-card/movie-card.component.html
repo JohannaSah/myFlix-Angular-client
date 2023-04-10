@@ -1,7 +1,9 @@
 <app-navbar />
 
 <div class="search-bar">
-    <app-search-bar (searchQueryEvent)="receiveFilteredMovies($event)" />
+    <app-search-bar 
+        (searchQueryEvent)="receiveFilteredMovies($event)" 
+    />
 </div>
 <div class="movie-grid">
     <ng-container *ngIf="searchResults.length > 0; else allMovies">

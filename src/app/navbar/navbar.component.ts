@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Location } from '@angular/common';
+
 // Component decorator
 @Component({
   selector: 'app-navbar',
@@ -13,7 +15,7 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   // Inject Router service
-  constructor(public router: Router) {}
+  constructor(private router: Router, private location: Location) {}
   
   // OnInit lifecycle hook
   ngOnInit(): void {}
@@ -21,6 +23,9 @@ export class NavbarComponent implements OnInit {
   // Navigates to movies page, called when the Movies button is clicked
   toMovies(): void {
     this.router.navigate(['movies']);
+    
+    this.location.replaceState('/movies');
+    window.location.reload();
   }
 
   // Navigates to user profile, called when the Profile button is clicked
