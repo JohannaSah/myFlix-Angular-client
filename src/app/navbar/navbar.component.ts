@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit {
   // Navigates to movies page, called when the Movies button is clicked
   toMovies(): void {
     this.router.navigate(['movies']);
-    
     this.location.replaceState('/movies');
     window.location.reload();
   }
