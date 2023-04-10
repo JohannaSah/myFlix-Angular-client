@@ -2,8 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
-
 // Component decorator
 @Component({
   selector: 'app-navbar',
