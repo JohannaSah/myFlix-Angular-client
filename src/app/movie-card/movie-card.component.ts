@@ -46,6 +46,7 @@ export class MovieCardComponent {
     this.getFavoriteMovies();
     //
     this.searchService.getSearchQuery().subscribe((query: string) => {
+      console.log('searchservice listener', query);
       this.searchQuery = query;
       this.getMovies();
     });
@@ -56,6 +57,7 @@ export class MovieCardComponent {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       console.log('this.movies from getMovies():',this.movies);
+      console.log('search.query within moviecard', this.searchQuery);
       if (this.searchQuery) {
         // Filter movies by search query
         this.searchResults = this.movies.filter((movie) => {

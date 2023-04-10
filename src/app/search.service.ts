@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -28,7 +28,8 @@ export interface Movie {
 
 export class SearchService {
   private apiUrl = 'https://movieapi-dcj2.onrender.com/';
-  private searchQuery = new BehaviorSubject<string>('');
+  public searchQuery = new BehaviorSubject<string>('');
+  public searchResults = new EventEmitter<any[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -40,6 +41,10 @@ export class SearchService {
     return this.searchQuery;
   }
 
+  getSearchResults(): EventEmitter<Movie[]> {
+    return this.searchResults;
+  }
+
   search(query: string, searchBy: string): Observable<Movie[]> {
     const url = `${this.apiUrl}movies?${searchBy}=${query}`;
     console.log('api url:', url);
@@ -47,9 +52,12 @@ export class SearchService {
       map((response: any) => {
         console.log('reponse:', response);
         if (response && response) {
-          return response as Movie[];
+          const movies = response as Movie[];
+          console.log('response as movie[]', movies);
+          this.searchResults.emit(movies); 
+          console.log('searchresult',movies);
+          return movies;
         }
-        console.log('response as movie[]', response as Movie[]);
         return [];
       })
     );

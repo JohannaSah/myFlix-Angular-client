@@ -15,7 +15,7 @@ export class SearchBarComponent implements OnInit {
   movies: any[];
   searchResults: any[];
   
-  @Output() searchQueryEvent = new EventEmitter<string>();
+  @Output() searchQueryEvent = new EventEmitter<any[]>();
 
   constructor(
     private searchService: SearchService,
@@ -33,24 +33,24 @@ export class SearchBarComponent implements OnInit {
   search() {
     const encodedSearchQuery = encodeURIComponent(this.searchQuery);
     console.log('encodedSearchQuery:', encodedSearchQuery);
-
+  
     this.searchService.search(encodedSearchQuery, this.searchBy).subscribe((movies) => {
       console.log('movies:', movies);
-
+  
       this.movies = movies.filter(movie => {
         const title = movie.Title.toLowerCase();
         const director = movie.Director.Name.toLowerCase();
         const genre = movie.Genre.Name.toLowerCase();
         const query = this.searchQuery.toLowerCase();
-
+  
         return title.includes(query) || director.includes(query) || genre.includes(query);
       });
-
+  
       console.log(`Filter successful. ${this.movies.length} movies found.`);
-      console.log('found movie:', this.movies);
+      console.log('found movie:', this.movies); // this is the result I want to send to the moviecardcomponent
       console.log('Emitting search query event with query:', this.searchQuery);
-
-      this.searchQueryEvent.emit(this.searchQuery);
+  
+      this.searchQueryEvent.emit(this.movies);
     });
   }
 }
