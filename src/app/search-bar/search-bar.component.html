@@ -10,3 +10,16 @@
         Search 
     </button>
 </div>
+
+<div class="search-bar">
+    <input 
+        class="input-field" 
+        type="text" 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search for movie, genre, director" 
+        (keydown.enter)="search()" 
+    >
+    <button class="search-button" (click)="search()"> 
+        Search 
+    </button>
+</div>

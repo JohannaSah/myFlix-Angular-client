@@ -79,8 +79,8 @@ export class FavoriteMoviesComponent {
   getFavoriteMovies(): void {
     this.fetchApiData.getUser().subscribe((resp: any) => {
       console.log(resp);
-      this.favorites = this.movies.filter(movie => resp.FavoriteMovies.includes(movie._id));
-      console.log(this.favorites, 'favourites');
+      this.favorites = this.movies.filter(movie => this.movies.filter(movie => resp.FavoriteMovies.includes(movie._id)).includes(movie._id));
+      console.log(this.favorites, 'favourites', 'favorites');
       return this.favorites; 
     });
   }
