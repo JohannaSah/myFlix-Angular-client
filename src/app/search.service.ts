@@ -30,14 +30,18 @@ export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  search(query: string, searchBy: string): Observable<Movie[]> {
+  search(query: string, searchBy: string): Observable<Movie[]> { 
     const url = `${this.apiUrl}movies?${searchBy}=${query}`;
+    console.log(url);
     return this.http.get(url).pipe(
       map((response: any) => {
+        console.log(response);
         if (response && response.data) {
-          return response.data as Movie[];
+          const movies = response.data as Movie[];
+          return movies.filter(movie => movie.Title.toLowerCase().includes(query.toLowerCase()));
         }
         console.log(response.data as Movie[]);
+        console.log('no movie found');
         return [];
       })
     );
