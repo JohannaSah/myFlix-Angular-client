@@ -52,20 +52,18 @@ export class MovieCardComponent {
     });
   }
 
+  receiveFilteredMovies(filteredMovies: any[]): void {
+    this.movies = filteredMovies;
+    console.log('filteredMovies', filteredMovies);
+    this.searchResults = filteredMovies;
+  }
+
   // Function to get all the movies from the database and store them in the movies array
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
-      console.log('this.movies from getMovies():',this.movies);
-      console.log('search.query within moviecard', this.searchQuery);
-      if (this.searchQuery) {
-        // Filter movies by search query
-        this.searchResults = this.movies.filter((movie) => {
-          return movie.Title.toLowerCase().includes(this.searchQuery.toLowerCase());
-        });
-      } else {
-        this.searchResults = this.movies;
-      }
+      console.log('this.movies from getMovies():', this.movies);
+      
       return this.movies;
     })
   }
